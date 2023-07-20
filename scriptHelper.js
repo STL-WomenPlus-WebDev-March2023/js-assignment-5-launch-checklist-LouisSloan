@@ -1,5 +1,5 @@
 // Write your helper functions here!
-require('isomorphic-fetch');
+//require('isomorphic-fetch');
 
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
    // Here is the HTML formatting for our mission target div.
@@ -30,26 +30,28 @@ function validateInput(testInput) {
 
 
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
-    let pilotStatus = document.getElementById("pilotStatus");
-    let copilotStatus = document.getElementById("copilotStatus");
-    let fuelStatus = document.getElementById("fuelStatus");
-    let cargoStatus = document.getElementById("cargoStatus");
+    let pilot = document.querySelector("input[name=pilotName]");
+   let copilot = document.querySelector("input[name=copilotName]");
+   let fuelLevel = document.querySelector("input[name=fuelLevel]");
+   let cargoLevel = document.querySelector("input[name=cargoMass]");
     if (validateInput(pilot) !== "Not a Number" && validateInput(copilot) !== "Not a Number" && validateInput(fuelLevel) !== "Is a Number" && validateInput(cargoLevel) !== "Is a Number"){
-        alert("Missing or invalid data, please review and resubmit entry.");
+      alert("Missing or invalid data, please review and resubmit entry.");
+        return;
     } else {
         pilotStatus.innerHTML = `Pilot ${pilot} is ready.`;
         copilotStatus.innerHTML = `Pilot ${copilot} is ready.`;
         list.style.faultyItems = "visible";
+        if (Number(fuelLevel) < 10000){
+            fuelStatus.innerHTML = 'Not enough fuel to launch!';
+            launchStatus.innerHTML = '<span style="color:red">Shuttle is not ready to launch.</span>';
+        } else if (Number(cargoLevel > 10000)){
+            cargoStatus.innerHTML = 'Too heavy to launch!';
+            launchStatus.innerHTML = '<span style="color:red">Shuttle is not ready to launch.</span>';
+        } else {
+            launchStatus.innerHTML = '<span style="color:#green">Shuttle ready for launch!</span>';
+        }
     }
-    if (Number(fuelLevel) < 10000){
-        fuelStatus.innerHTML = 'Not enough fuel to launch!';
-        launchStatus.innerHTML = '<span style="color:red">Shuttle is not ready to launch.</span>';
-    } else if (Number(cargoLevel > 10000)){
-        cargoStatus.innerHTML = 'Too heavy to launch!';
-        launchStatus.innerHTML = '<span style="color:red">Shuttle is not ready to launch.</span>';
-    } else {
-        launchStatus.innerHTML = '<span style="color:#green">Shuttle ready for launch!</span>';
-    }
+    
     
 }
 

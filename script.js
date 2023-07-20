@@ -1,12 +1,24 @@
 // Write your JavaScript code here!
 
 //const { myFetch } = require("./scriptHelper");
-
 //const { formSubmission } = require("./scriptHelper");
-
 //const { validateInput } = require("./scriptHelper");
 
 window.addEventListener("load", function() {
+   let list = document.getElementById("faultyItems");
+   //list.style.visibility = "hidden"
+   let form = document.querySelector("form");
+   form.addEventListener("submit", function(event) {
+      let pilotName = document.querySelector("input[name=pilotName]");
+      let copilotName = document.querySelector("input[name=copilotName]");
+      let fuelLevel = document.querySelector("input[name=fuelLevel]");
+      let cargoMass = document.querySelector("input[name=cargoMass]");
+      formSubmission(document, list, pilotName.value, copilotName.value, fuelLevel.value, cargoMass.value);   
+      if (formSubmission(pilotName.value) === ""){
+         event.preventDefault();
+         console.log("submission prevented");
+      }
+   });
 
    let listedPlanets;
    // Set listedPlanetsResponse equal to the value returned by calling myFetch()
@@ -28,18 +40,5 @@ window.addEventListener("load", function() {
 
       addDestinationInfo(document, name, diameter, star, distance, moons, imageURL);
    })
-
-   let list = document.getElementById("faultyItems");
-   list.style.visibility = "hidden"
-   let form = document.querySelector("form");
-
-   form.addEventListener("submit", function(event) {
-event.preventDefault();
-   let pilotName = document.querySelector("input[name=pilotName]");
-   let copilotName = document.querySelector("input[name=copilotName]");
-   let fuelLevel = document.querySelector("input[name=fuelLevel]");
-   let cargoMass = document.querySelector("input[name=cargoMass]");
-   formSubmission(pilotName.value, copilotName.value, fuelLevel.value, cargoMass.value);   
-   });
 
 });
