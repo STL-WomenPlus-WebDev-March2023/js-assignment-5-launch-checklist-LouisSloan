@@ -3,37 +3,69 @@ require('isomorphic-fetch');
 
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
    // Here is the HTML formatting for our mission target div.
-   /*
-                <h2>Mission Destination</h2>
+   const div = document.getElementById("missionTarget");
+   div.innerHTML = 
+                `<h2>Mission Destination</h2>
                 <ol>
-                    <li>Name: </li>
-                    <li>Diameter: </li>
+                    <li>Name: ${name} </li>
+                    <li>Diameter: ${diameter} </li>
                     <li>Star: ${star}</li>
-                    <li>Distance from Earth: </li>
-                    <li>Number of Moons: </li>
+                    <li>Distance from Earth: ${distance} </li>
+                    <li>Number of Moons: ${moons} </li>
                 </ol>
-                <img src="">
-   */
-}
+                <img src="${imageUrl}">`
+   }
 
 function validateInput(testInput) {
-   
+   if (testInput === ""){
+    return "Empty";
+   }
+   else if (isNaN(testInput)) {
+    return "Not a Number";
+   }
+   else {
+    return "Is a Number";
+   }
 }
 
+
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
-   
+    let pilotStatus = document.getElementById("pilotStatus");
+    let copilotStatus = document.getElementById("copilotStatus");
+    let fuelStatus = document.getElementById("fuelStatus");
+    let cargoStatus = document.getElementById("cargoStatus");
+    if (validateInput(pilot) !== "Not a Number" && validateInput(copilot) !== "Not a Number" && validateInput(fuelLevel) !== "Is a Number" && validateInput(cargoLevel) !== "Is a Number"){
+        alert("Missing or invalid data, please review and resubmit entry.");
+    } else {
+        pilotStatus.innerHTML = `Pilot ${pilot} is ready.`;
+        copilotStatus.innerHTML = `Pilot ${copilot} is ready.`;
+        list.style.faultyItems = "visible";
+    }
+    if (Number(fuelLevel) < 10000){
+        fuelStatus.innerHTML = 'Not enough fuel to launch!';
+        launchStatus.innerHTML = '<span style="color:red">Shuttle is not ready to launch.</span>';
+    } else if (Number(cargoLevel > 10000)){
+        cargoStatus.innerHTML = 'Too heavy to launch!';
+        launchStatus.innerHTML = '<span style="color:red">Shuttle is not ready to launch.</span>';
+    } else {
+        launchStatus.innerHTML = '<span style="color:#green">Shuttle ready for launch!</span>';
+    }
+    
 }
 
 async function myFetch() {
     let planetsReturned;
 
     planetsReturned = await fetch().then( function(response) {
+        return response.json();
         });
 
     return planetsReturned;
 }
 
 function pickPlanet(planets) {
+    let index = Math.floor(Math.random*length);
+    return planets[index];
 }
 
 module.exports.addDestinationInfo = addDestinationInfo;
