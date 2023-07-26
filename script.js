@@ -5,6 +5,10 @@
 // const { validateInput } = require("./scriptHelper");
 
 window.addEventListener("load", function() {
+   let list = document.getElementById("faultyItems");
+list.style.visibility = "hidden";
+let form = document.querySelector("form");
+
    let listedPlanets;
    // Set listedPlanetsResponse equal to the value returned by calling myFetch()
    let listedPlanetsResponse = myFetch();
@@ -25,13 +29,7 @@ window.addEventListener("load", function() {
 
       addDestinationInfo(document, planetPicked.name, planetPicked.diameter, planetPicked.star, planetPicked.distance, planetPicked.moons, planetPicked.image);
    })
-});
-
-let list = document.getElementById("faultyItems");
-list.style.visibility = "hidden";
-let form = document.querySelector("form");
-
-form.addEventListener("submit", function(event) {
+   form.addEventListener("submit", function(event) {
       let pilotName = document.querySelector("input[name=pilotName]");
       let pilot = pilotName.value;
       let copilotName = document.querySelector("input[name=copilotName]");
@@ -44,3 +42,5 @@ form.addEventListener("submit", function(event) {
          event.preventDefault();
          console.log("submission prevented");
 });
+});
+
