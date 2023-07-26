@@ -4,6 +4,7 @@
 // const { formSubmission } = require("./scriptHelper");
 // const { validateInput } = require("./scriptHelper");
 
+
 window.addEventListener("load", function() {
    let list = document.getElementById("faultyItems");
 list.style.visibility = "hidden";
@@ -19,15 +20,14 @@ let form = document.querySelector("form");
        console.log(listedPlanets);
        // Below this comment call the appropriate helper functions to pick a planet fom the list of planets and add that information to your destination.
        let planetPicked = pickPlanet(listedPlanets);
-       let name = listedPlanets[result].name;
-       let diameter = listedPlanets[result].diameter;
-       let star = listedPlanets[result].diameter;
-       let distance = listedPlanets[result].distance;
-       let moons = listedPlanets[result].moons;
-       let imageURL = listedPlanets[result].imageURL;
-       img.innerHTML = imageURL;
+       let name = planetPicked.name;
+       let diameter = planetPicked.diameter;
+       let star = planetPicked.diameter;
+       let distance = planetPicked.distance;
+       let moons = planetPicked.moons;
+       let imageURL = planetPicked.image;
 
-      addDestinationInfo(document, planetPicked.name, planetPicked.diameter, planetPicked.star, planetPicked.distance, planetPicked.moons, planetPicked.image);
+      addDestinationInfo(document, name, diameter, star, distance, moons, imageURL);
    })
    form.addEventListener("submit", function(event) {
       let pilotName = document.querySelector("input[name=pilotName]");
