@@ -38,30 +38,30 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
       alert("Missing or invalid data, please review and resubmit entry.");
     } else {
         list.style.visibility = "visible";
-        pilotStatus.innerHTML = `Pilot ${pilot} is ready.`;
-        copilotStatus.innerHTML = `Pilot ${copilot} is ready.`;
+        pilotStatus.innerHTML = `Pilot ${pilot} is ready for launch.`;
+        copilotStatus.innerHTML = `Co-pilot ${copilot} is ready for launch.`;
         let status = document.getElementById("launchStatus");
 
         if (Number(fuelLevel) < 10000 && Number(cargoLevel) <= 10000) {
             fuelStatus.innerHTML = "Fuel level too low for launch";
             cargoStatus.innerHTML = "Cargo mass low enough for launch"
             status.innerHTML = "Shuttle Not Ready for Launch";
-            status.style.color = "#C7254E";
+            status.style.color = "#rgb(199, 37, 78)";
         } else if(Number(fuelLevel) >= 10000 && Number(cargoLevel) > 10000){
             fuelStatus.innerHTML = "Fuel level high enough for launch"
-            cargoStatus.innerHTML = "Cargo mass is too high for launch"
+            cargoStatus.innerHTML = "Cargo mass too heavy for launch"
             status.innerHTML = "Shuttle Not Ready for Launch";
-            status.style.color = "#C7254E"; 
+            status.style.color = "#rgb(199, 37, 78)"; 
         } else if(Number(fuelLevel) < 10000 && Number(cargoLevel) <= 10000){
             cargoStatus.innerHTML = "Cargo mass low enough for launch"
             fuelStatus.innerHTML = "Fuel level too low for launch";
             status.innerHTML = "Shuttle Not Ready for Launch";
-            status.style.color = "#C7254E"; 
+            status.style.color = "#rgb(199, 37, 78)"; 
         } else {
             fuelStatus.innerHTML = "Fuel level high enough for launch"
             cargoStatus.innerHTML = "Cargo mass low enough for launch"
             status.innerHTML = "Shuttle is Ready for Launch";
-            status.style.color = "#419F6A";
+            status.style.color = "#rgb(65, 159, 106)";
         }
     }
     
