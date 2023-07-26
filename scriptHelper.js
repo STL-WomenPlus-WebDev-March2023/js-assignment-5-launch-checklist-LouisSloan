@@ -42,7 +42,12 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
         copilotStatus.innerHTML = `Co-pilot ${copilot} is ready for launch`;
         let status = document.getElementById("launchStatus");
 
-        if (Number(fuelLevel) < 10000 && Number(cargoLevel) <= 10000) {
+        if (Number(fuelLevel) < 10000 && Number(cargoLevel) > 10000){
+        fuelStatus.innerHTML = "Fuel level too low for launch";
+        cargoStatus.innerHTML = "Cargo mass too heavy for launch"
+        status.innerHTML = "Shuttle Not Ready for Launch";
+        status.style.color = "rgb(199, 37, 78)";
+        } else if (Number(fuelLevel) < 10000 && Number(cargoLevel) <= 10000) {
             fuelStatus.innerHTML = "Fuel level too low for launch";
             cargoStatus.innerHTML = "Cargo mass low enough for launch"
             status.innerHTML = "Shuttle Not Ready for Launch";
